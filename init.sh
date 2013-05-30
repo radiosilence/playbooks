@@ -303,3 +303,12 @@ ENDSSHD
 
 mkdir /srv
 chown deploy:www-data /srv
+
+cat > /etc/postgresql/9.1/main/pg_hba.conf <<ENDHBA
+local   all             postgres                                peer
+local   all             all                                     md5
+host    all             all             127.0.0.1/32            md5
+host    all             all             ::1/128                 md5
+ENDHBA
+
+/etc/init.d/postgresql restart

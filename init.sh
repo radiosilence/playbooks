@@ -298,3 +298,5 @@ ENDSSHD
 
 /etc/init.d/ssh restart
 
+mkdir /srv
+chown deploy:www-data /srv

@@ -40,7 +40,9 @@ apt-get install -y \
     curl \
     git \
     libjpeg-dev \
+    libmemcached-dev \
     python2.7-dev \
+    memcached \
     mercurial \
     nginx-common \
     nginx-extras \

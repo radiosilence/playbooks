@@ -50,7 +50,7 @@ apt-get install -y \
     postgresql-server-dev-9.1 \
     python2.7 \
     python-virtualenv \
-    redis \
+    redis-server \
     sudo \
     vim \
     zlib1g-dev \

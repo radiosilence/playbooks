@@ -46,6 +46,8 @@ apt-get install -y \
     mercurial \
     nginx-common \
     nginx-extras \
+    nodejs \
+    postfix \
     postgresql-9.1 \
     postgresql-server-dev-9.1 \
     python2.7 \
@@ -56,6 +58,7 @@ apt-get install -y \
     zlib1g-dev \
     zsh
 
+ln -s /usr/bin/nodejs /usr/bin/node
 
 cat > /etc/nginx/nginx.conf <<ENDNGINX
 user www-data;

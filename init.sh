@@ -174,7 +174,6 @@ do_start()
 {
     local PIDFILE=$RUN/$VERSION.pid
     local START_OPTS=" \
-        --emperor $ENABLED_CONFIGS_DIR \
         --pidfile $PIDFILE \
     --daemonize /var/log/$NAME \
     --uid $USER \
@@ -182,7 +181,7 @@ do_start()
     --enable-threads \
         "
     if do_pid_check $PIDFILE; then
-        $DAEMON $DAEMON_OPTS $START_OPTS
+        $DAEMON $DAEMON_OPTS $START_OPTS --emperor "$ENABLED_CONFIGS_DIR"
     else
         echo "Already running!"
     fi

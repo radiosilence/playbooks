@@ -189,7 +189,6 @@ do_start()
         --pidfile $PIDFILE \
     --daemonize /var/log/$NAME \
     --emperor-tyrant \
-    --emperor-required-heartbeat 30 \
     --enable-threads \
         "
     if do_pid_check $PIDFILE; then

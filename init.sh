@@ -120,6 +120,18 @@ ENDSUDO
 UWSGI_ENV=/opt/uwsgi
 virtualenv $UWSGI_ENV
 $UWSGI_ENV/bin/pip install uwsgi
+mkdir -p $UWSG_ENV/etc/uwsgi.d
+cat > /opt/uwsgi/etc/uwsgi.d/fastrouter.ini <<'ENDFRUITER'
+[uwsgi]
+shared-socket = 127.0.0.1:3031
+fastrouter-subscription-server = 127.0.0.1:2626
+fastrouter = =0
+master = true
+processes = 4
+fastrouter-cheap = true
+ENDFRUITER
+chown nobody:nogroup /opt/uwsgi/etc/uwsgi.d/*.ini
+
 cat > /etc/init.d/uwsgi <<'ENDUWSGI'
 #!/usr/bin/env bash
 
@@ -176,12 +188,11 @@ do_start()
     local START_OPTS=" \
         --pidfile $PIDFILE \
     --daemonize /var/log/$NAME \
-    --uid $USER \
-    --gid $GROUP \
+    --emperor-tyrant \
     --enable-threads \
         "
     if do_pid_check $PIDFILE; then
-        $DAEMON $DAEMON_OPTS $START_OPTS --emperor "$ENABLED_CONFIGS_DIR"
+        $DAEMON $DAEMON_OPTS $START_OPTS --emperor "$ENABLED_CONFIGS_DIR" --emperor "/opt/uwsgi/etc/uwsgi.d/*.ini"
     else
         echo "Already running!"
     fi

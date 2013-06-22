@@ -26,9 +26,9 @@ END
 chmod +x /etc/network/if-post-down.d/iptables
 
 cat > /etc/apt/sources.list <<ENDSOURCES
-deb http://http.debian.net/debian/ wheezy main non-free contrib
-deb http://security.debian.org/ wheezy/updates main non-free contrib
-deb http://http.debian.net/debian/ wheezy-updates main non-free contrib
+deb http://http.debian.net/debian/ wheezy main
+deb http://security.debian.org/ wheezy/updates main
+deb http://http.debian.net/debian/ wheezy-updates main
 deb http://repos.blackflags.co.uk/debian/ wheezy main
 ENDSOURCES
 

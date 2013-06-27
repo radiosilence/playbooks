@@ -6,13 +6,8 @@
   user: jcleveland
   sudo: yes
   tasks:
-  - action: command iptables -A INPUT -i lo -j ACCEPT
-  - action: command iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-  - action: command iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
-  - action: command iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-  - action: command iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-  - action: command iptables -A INPUT -j DROP
-  - action: shell iptables-save > /etc/iptables.rules
+  - action: template src=templates/iptables.j2 dest=/etc/iptables.rules
+  - action: shell iptables-restore < /etc/iptables.rules
   - action: apt_key url=http://repos.blackflags.co.uk/debian/jc-blackflags.gpg.key state=present
   - action: template src=templates/sources.j2 dest=/etc/apt/sources.list
   - action: template src=templates/iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
@@ -47,7 +42,7 @@
   - action: file dest=/etc/nginx/servers state=directory
   - action: file path=/etc/nginx/certs state=directory
   - action: template src=templates/sudoers.j2 dest=/etc/sudoers
-  - action: user name={{ primary_user }} createhome=yes generate_ssh_key=yes group={{ primary_user }} append=yes groups=sudo shell=/bin/bash
+  - action: user name={{ primary_user }} createhome=yes group={{ primary_user }} append=yes groups=sudo shell=/bin/bash
   - action: template src=templates/authorized_keys.j2 dest=/home/{{ primary_user }}/.ssh/authorized_keys 
   - action: template src=templates/known_hosts.j2 dest=/home/{{ primary_user }}/.ssh/known_hosts 
   - action: command virtualenv /opt/uwsgi

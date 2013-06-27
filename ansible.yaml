@@ -3,9 +3,11 @@
   vars:
     ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDipps3qoDk/jY3FGypRPOBgVwprVBqtzfCVYDRFxkMg8l2CmU9tU2w6TTa+VnaUuHyzukCnI0StZhkEuVB+tuae6j6Xsl5iMiZLD0Wl2AmqT5Hf2mR39ILJTm/PHxEiNsaWLbLzRuqpXNhjCDOBdZn/hXNDLdXVFw2gYffuBuZk0hsV0Shi8fPrNCj4NhghFZUNIBmeOoyqzWDQf2iHreDRTNmNL6uYBaVqs9m2KlUg41uEQ0rarFyi3nBj9zGjhJev4yxCBFvrUfBsyfxpfgSsNdf29R5KJ3EhQREf5vAnL5GkT0KKWP1yzDoW4JVS5j43W07brm/X5/gJVwltGl5MqiopWG6MQG/26htgBoywH22wBj5N1g7lYfJP8oT/fBqbnvJdFp4lJO8kNmgGESC4YWHtraUSpmG9EdKQ9sJMw7QhGNLTVKTtefmaA7PznzGITk8qZ8qsrx6pzL1p8zLMX5fmKV7D+43QcNmQ9H2Ajohd8NXlvYMSiBUhmLhBYyx3GGR7cOnjMhkpH19uqp/ZYXSQIkuik9YmrTLPVouC8ePOxm6aMyTnpWfbNLoq1ECnKxeDxDchwrYyK2mR7aLXhiVCMWXKR+CzDhZHl/iZZcn/pq7VtDRr+1c/hMuNqDELCEfTDVJew/Q07SJKEhmn7zhGn/4NwZOdNaUY4LS8Q== jamescleveland@gmail.com
     primary_user: jcleveland
-  user: jcleveland
-  sudo: yes
+  user: root
+  # user: jcleveland
+  # sudo: yes
   tasks:
+  - action: authorized_key user=root key='{{ ssh_key }}'
   - action: template src=templates/iptables.j2 dest=/etc/iptables.rules
   - action: shell iptables-restore < /etc/iptables.rules
   - action: apt_key url=http://repos.blackflags.co.uk/debian/jc-blackflags.gpg.key state=present
@@ -42,8 +44,8 @@
   - action: file dest=/etc/nginx/servers state=directory
   - action: file path=/etc/nginx/certs state=directory
   - action: template src=templates/sudoers.j2 dest=/etc/sudoers
-  - action: user name={{ primary_user }} createhome=yes group={{ primary_user }} append=yes groups=sudo shell=/bin/bash
-  - action: template src=templates/authorized_keys.j2 dest=/home/{{ primary_user }}/.ssh/authorized_keys 
+  - action: user name={{ primary_user }} createhome=yes group={{ primary_user }} append=yes groups=sudo shell=/bin/bash update_password=on_create
+  - action: authorized_key user={{ primary_user }} key='{{ ssh_key }}'
   - action: template src=templates/known_hosts.j2 dest=/home/{{ primary_user }}/.ssh/known_hosts 
   - action: command virtualenv /opt/uwsgi
   - action: command /opt/uwsgi/bin/pip install uwsgi

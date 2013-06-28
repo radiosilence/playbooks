@@ -17,8 +17,8 @@ PATH=/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/opt/uwsgi/bin/uwsgi
 RUN=/var/run/uwsgi
 ENABLED_CONFIGS_DIR=/srv/*/*/uwsgi.*
-USER=deploy
-GROUP=www-data
+USER=root
+GROUP=root
 NAME=uwsgi
 DESC=uWSGI
 VERSION=$NAME
@@ -52,9 +52,9 @@ do_start()
     local PIDFILE=$RUN/$VERSION.pid
     local START_OPTS=" \
         --pidfile $PIDFILE \
-    --daemonize /var/log/$NAME \
-    --emperor-tyrant \
-    --enable-threads \
+        --daemonize /var/log/$NAME \
+        --emperor-tyrant \
+        --enable-threads \
         "
     if do_pid_check $PIDFILE; then
         $DAEMON $DAEMON_OPTS $START_OPTS --emperor "$ENABLED_CONFIGS_DIR" --emperor "/opt/uwsgi/etc/uwsgi.d/*.ini"

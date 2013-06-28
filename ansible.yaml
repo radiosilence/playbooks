@@ -42,7 +42,7 @@
   - action: file dest=/etc/nginx/servers state=directory
   - action: file path=/etc/nginx/certs state=directory
   - action: template src=templates/sudoers.j2 dest=/etc/sudoers
-  - action: user name={{ primary_user }} createhome=yes group={{ primary_user }} append=yes groups=sudo shell=/bin/bash update_password=on_create
+  - action: user name={{ primary_user }} createhome=yes group=sudo append=yes groups=sudo shell=/bin/bash update_password=on_create
   - action: authorized_key user={{ primary_user }} key='{{ ssh_key }}'
   - action: template src=templates/known_hosts.j2 dest=/home/{{ primary_user }}/.ssh/known_hosts 
   - action: command virtualenv /opt/uwsgi

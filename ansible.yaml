@@ -28,6 +28,7 @@
     - nginx-common
     - nginx-extras
     - nodejs
+    - pkg-config
     - postfix
     - postgresql-9.1
     - postgresql-server-dev-9.1

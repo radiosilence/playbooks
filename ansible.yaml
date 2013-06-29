@@ -16,6 +16,7 @@
   - action: file path=/etc/network/if-post-down.d/iptables mode=755
   - action: apt pkg={{ item }} state=present update_cache=yes
     with_items:
+    - automake
     - build-essential
     - curl
     - git

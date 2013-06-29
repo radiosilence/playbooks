@@ -20,6 +20,7 @@
     - build-essential
     - curl
     - git
+    - htop
     - libjpeg8-dev
     - libmemcached-dev
     - memcached

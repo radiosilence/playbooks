@@ -42,6 +42,7 @@
     - vim
     - zlib1g-dev
     - zsh
+  - action: apt pkg=libnss-mdns state=absent
   - action: file src=/usr/bin/nodejs path=/usr/bin/node state=link
   - action: template src=templates/nginx.j2 dest=/etc/nginx/nginx.conf
   - action: file dest=/etc/nginx/servers state=directory

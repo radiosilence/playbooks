@@ -6,6 +6,7 @@ events {
 http {
     include  mime.types;
     default_type  application/octet-stream;
+    server_names_hash_bucket_size 64;
 
     sendfile  on;
     tcp_nopush  on;

@@ -1,0 +1,58 @@
+tasks:
+- action: authorized_key user=root key='{{ ssh_key }}'
+- action: template src=templates/iptables.j2 dest=/etc/iptables.rules
+- action: shell iptables-restore < /etc/iptables.rules
+- action: apt_key url=http://repos.blackflags.co.uk/debian/jc-blackflags.gpg.key state=present
+- action: template src=templates/sources.j2 dest=/etc/apt/sources.list
+- action: template src=templates/iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
+- action: file path=/etc/network/if-pre-up.d/iptables mode=755
+- action: template src=templates/iptables_save.j2 dest=/etc/network/if-post-down.d/iptables
+- action: file path=/etc/network/if-post-down.d/iptables mode=755
+- action: template src=templates/20auto-upgrades.j2 dest=/etc/apt/apt.conf.d/20auto-upgrades
+- action: apt pkg={{ item }} state=present update_cache=yes
+  with_items:
+  - automake
+  - build-essential
+  - curl
+  - git
+  - htop
+  - libjpeg8-dev
+  - libmemcached-dev
+  - memcached
+  - mercurial
+  - nginx-common
+  - nginx-extras
+  - nodejs
+  - pkg-config
+  - postfix
+  - python-virtualenv
+  - python2.7
+  - python2.7-dev
+  - python-apt
+  - redis-server
+  - sudo
+  - unattended-upgrades
+  - vim
+  - zlib1g-dev
+  - zsh
+- action: apt pkg=libnss-mdns state=absent
+- action: file src=/usr/bin/nodejs path=/usr/bin/node state=link
+- action: template src=templates/nginx.j2 dest=/etc/nginx/nginx.conf
+- action: file dest=/etc/nginx/servers state=directory
+- action: file path=/etc/nginx/certs state=directory
+- action: template src=templates/sudoers.j2 dest=/etc/sudoers
+- action: user name={{ primary_user }} createhome=yes group=sudo append=yes groups=sudo shell=/bin/bash update_password=on_create
+- action: authorized_key user={{ primary_user }} key='{{ ssh_key }}'
+- action: template src=templates/known_hosts.j2 dest=/home/{{ primary_user }}/.ssh/known_hosts 
+- action: command virtualenv /opt/uwsgi
+- action: command /opt/uwsgi/bin/pip install uwsgi
+- action: file path=/opt/uwsgi/etc/uwsgi.d state=directory
+- action: template src=templates/uwsgi_fastrouter.j2 dest=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini
+- action: file path=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini owner=nobody group=nogroup
+- action: template src=templates/uwsgi_init.j2 dest=/etc/init.d/uwsgi
+- action: file path=/etc/init.d/uwsgi mode=755
+- action: command update-rc.d uwsgi defaults
+- action: template src=templates/sshd_config.j2 dest=/etc/ssh/sshd_config
+- action: service name=ssh state=restarted
+- action: file path=/srv state=directory mode=711
+- action: service name=nginx state=restarted

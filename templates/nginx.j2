@@ -27,6 +27,11 @@ http {
         application/x-font-opentype font/woff application/octet-stream
         application/vnd.ms-fontobject;
 
+    ssl_protocols  TLSv1.2 TLSv1.1 TLSv1 SSLv3;
+    ssl_ciphers  ECDHE-RSA-AES256-SHA384:AES256-GCM-SHA384:RC4-SHA:!ADH:!MD5:!aNULL:!EDH;
+    ssl_prefer_server_ciphers  on;
+
+
     include /etc/nginx/servers/*/*.conf;
     include /etc/nginx/servers-custom/*.conf;
     include /srv/*/*/nginx.conf;

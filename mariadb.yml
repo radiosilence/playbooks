@@ -14,4 +14,3 @@
     - libmariadbclient-dev
     - libmariadbd-dev
   - action: service name=mariadb state=restarted
-  - action: apt_key url=http://repos.blackflags.co.uk/debian/jc-blackflags.gpg.key state=present

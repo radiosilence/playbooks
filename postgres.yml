@@ -5,7 +5,7 @@
     primary_user: jcleveland
   user: root
   tasks:
-  - include: tasks/base.yaml
+  - include: tasks/base.yml
   - action: apt pkg={{ item }} state=present update_cache=yes
     with_items:
     - postgresql-9.1

@@ -5,7 +5,7 @@
     primary_user: jcleveland
   user: root
   tasks:
-  - include: tasks/base.yaml
+  - include: tasks/base.yml
   - action: apt_key url='http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xCBCB082A1BB943DB' state=present
   - action: apt_repository 'deb http://mirror.netcologne.de/mariadb/repo/5.5/debian wheezy main'
   - action: apt pkg={{ item }} state=present update_cache=yes

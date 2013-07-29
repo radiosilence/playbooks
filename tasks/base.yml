@@ -1,4 +1,4 @@
-tasks:
+---
 - action: authorized_key user=root key='{{ ssh_key }}'
 - action: template src=templates/iptables.j2 dest=/etc/iptables.rules
 - action: shell iptables-restore < /etc/iptables.rules

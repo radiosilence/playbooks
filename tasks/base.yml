@@ -20,6 +20,7 @@ tasks:
   - libmemcached-dev
   - memcached
   - mercurial
+  - molly-guard
   - nginx-common
   - nginx-extras
   - nodejs

@@ -1,0 +1,7 @@
+---
+- action: apt pkg={{ item }} state=present update_cache=yes
+  with_items:
+  - postgresql-9.1
+  - postgresql-server-dev-9.1
+- action: template src=templates/pg_hba.j2 dest=/etc/postgresql/9.1/main/pg_hba.conf
+- action: service name=postgresql state=restarted

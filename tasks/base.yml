@@ -3,6 +3,7 @@
 - action: template src=templates/iptables.j2 dest=/etc/iptables.rules
 - action: shell iptables-restore < /etc/iptables.rules
 - action: apt_key url=http://repos.blackflags.co.uk/debian/jc-blackflags.gpg.key state=present
+- action: apt_key url=https://download.newrelic.com/548C16BF.gpg state=present
 - action: template src=templates/sources.j2 dest=/etc/apt/sources.list
 - action: template src=templates/iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
 - action: file path=/etc/network/if-pre-up.d/iptables mode=755

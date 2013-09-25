@@ -4,13 +4,18 @@
 - action: shell iptables-restore < /etc/iptables.rules
 - action: apt_key url=http://repos.blackflags.co.uk/debian/jc-blackflags.gpg.key state=present
 - action: apt_key url=https://download.newrelic.com/548C16BF.gpg state=present
+- action: apt_key url=http://nginx.org/keys/nginx_signing.key state=present
 - action: template src=templates/sources.j2 dest=/etc/apt/sources.list
 - action: template src=templates/iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
 - action: file path=/etc/network/if-pre-up.d/iptables mode=755
 - action: template src=templates/iptables_save.j2 dest=/etc/network/if-post-down.d/iptables
 - action: file path=/etc/network/if-post-down.d/iptables mode=755
 - action: template src=templates/20auto-upgrades.j2 dest=/etc/apt/apt.conf.d/20auto-upgrades
-- action: apt pkg={{ item }} state=present update_cache=yes
+- action: apt pkg={{ item }} state=absent update_cache=yes
+  with_items:
+  - nginx-extras
+  - nginx-common
+- action: apt pkg={{ item }} state=latest update_cache=yes
   with_items:
   - automake
   - build-essential
@@ -22,8 +27,7 @@
   - memcached
   - mercurial
   - molly-guard
-  - nginx-common
-  - nginx-extras
+  - nginx
   - nodejs
   - pkg-config
   - postfix

@@ -48,6 +48,7 @@
 - action: template src=templates/nginx.j2 dest=/etc/nginx/nginx.conf
 - action: file dest=/etc/nginx/servers state=directory
 - action: file path=/etc/nginx/certs state=directory
+- action: template src=templates/startssl.j2 dest=/etc/nginx/certs/startssl.pem
 - action: template src=templates/sudoers.j2 dest=/etc/sudoers
 - action: user name={{ primary_user }} createhome=yes group=sudo append=yes groups=sudo shell=/bin/bash update_password=on_create
 - action: authorized_key user={{ primary_user }} key='{{ ssh_key }}'

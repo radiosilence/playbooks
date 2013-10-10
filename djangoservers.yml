@@ -1,6 +1,7 @@
 ---
 # file: djangoservers.yml
 - hosts: djangoservers
+  user: root
   roles:
   - common
   - nginx

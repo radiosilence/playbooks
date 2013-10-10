@@ -5,14 +5,13 @@
   - deb http://cdn.debian.net/debian/ wheezy main
   - deb http://security.debian.org/ wheezy/updates main
   - deb http://cdn.debian.net/debian/ wheezy-updates main
-- action: template src=templates/iptables.j2 dest=/etc/iptables.rules
+- action: template src=iptables.j2 dest=/etc/iptables.rules
 - action: shell iptables-restore < /etc/iptables.rules
-- action: template src=templates/sources.j2 dest=/etc/apt/sources.list
-- action: template src=templates/iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
+- action: template src=iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
 - action: file path=/etc/network/if-pre-up.d/iptables mode=755
-- action: template src=templates/iptables_save.j2 dest=/etc/network/if-post-down.d/iptables
+- action: template src=iptables_save.j2 dest=/etc/network/if-post-down.d/iptables
 - action: file path=/etc/network/if-post-down.d/iptables mode=755
-- action: template src=templates/20auto-upgrades.j2 dest=/etc/apt/apt.conf.d/20auto-upgrades
+- action: template src=20auto-upgrades.j2 dest=/etc/apt/apt.conf.d/20auto-upgrades
 - action: apt pkg={{ item }} state=latest update_cache=yes
   with_items:
   - automake
@@ -28,7 +27,7 @@
   - vim
   - zsh
 - action: apt pkg=libnss-mdns state=absent
-- action: template src=templates/sudoers.j2 dest=/etc/sudoers'
-- action: template src=templates/sshd_config.j2 dest=/etc/ssh/sshd_config
+- action: template src=sudoers.j2 dest=/etc/sudoers
+- action: template src=sshd_config.j2 dest=/etc/ssh/sshd_config
 - action: service name=ssh state=restarted
 - action: file path=/srv state=directory mode=711

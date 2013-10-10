@@ -4,5 +4,5 @@
   - postgresql-9.1
   - postgresql-server-dev-9.1
   - pgbouncer
-- action: template src=templates/pg_hba.j2 dest=/etc/postgresql/9.1/main/pg_hba.conf
+- action: template src=pg_hba.j2 dest=/etc/postgresql/9.1/main/pg_hba.conf
 - action: service name=postgresql state=restarted

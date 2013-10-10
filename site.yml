@@ -1,0 +1,4 @@
+---
+# file: site.yml
+- include: djangoservers.yml
+- include: postgresservers.yml

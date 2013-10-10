@@ -1,0 +1,7 @@
+---
+- action: apt_key url=http://repos.blackflags.co.uk/debian/jc-blackflags.gpg.key state=present
+- action: apt_repository repo='deb http://repos.blackflags.co.uk/debian/ wheezy main newrelic non-free' state=present
+- action: apt pkg={{ item }} state=latest update_cache=yes
+  with_items:
+- action: file src=/usr/bin/nodejs path=/usr/bin/node state=link
+  - nodejs

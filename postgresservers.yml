@@ -1,0 +1,6 @@
+---
+# file: postgresservers
+- hosts: postgresservers
+  roles:
+  - common
+  - postgresql

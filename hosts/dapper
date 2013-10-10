@@ -1,7 +1,7 @@
-[base]
+[djangoservers]
 officenumbers.co.uk
 ronon
 
-[postgres]
+[postgresservers]
 officenumbers.co.uk
 ronon

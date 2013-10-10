@@ -1,0 +1,6 @@
+---
+- action: apt pkg={{ item }} state=latest update_cache=yes
+  with_items:
+  - libjpeg8-dev
+  - zlib1g-dev
+  - python2.7-dev

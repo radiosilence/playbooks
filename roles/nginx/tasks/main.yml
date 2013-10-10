@@ -1,0 +1,15 @@
+---
+- action: apt_repository repo='deb http://nginx.org/packages/mainline/debian/ wheezy nginx' state=present
+- action: apt_key url=http://nginx.org/keys/nginx_signing.key state=present
+- action: apt pkg={{ item }} state=absent
+  with_items:
+  - nginx-extras
+  - nginx-common
+- action: apt pkg={{ item }} state=latest update_cache=yes
+  with_items:
+  - nginx
+- action: service name=nginx state=restarted
+- action: template src=templates/nginx.j2 dest=/etc/nginx/nginx.conf
+- action: file dest=/etc/nginx/servers state=directory
+- action: file path=/etc/nginx/certs state=directory
+- action: template src=templates/startssl.j2 dest=/etc/nginx/certs/startssl.pem

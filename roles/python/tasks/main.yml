@@ -1,0 +1,8 @@
+---
+- action: apt pkg={{ item }} state=latest update_cache=yes
+  with_items:
+  - python2.7
+  - python2.7-dev
+  - python-virtualenv
+  - python-apt
+  - virtualenvwrapper

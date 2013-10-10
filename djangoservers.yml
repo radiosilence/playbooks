@@ -1,0 +1,9 @@
+---
+# file: djangoservers.yml
+- hosts: djangoservers
+  roles:
+  - common
+  - nginx
+  - python
+  - uwsgi
+  - django

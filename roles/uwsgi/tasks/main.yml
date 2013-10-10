@@ -1,0 +1,10 @@
+---
+- action: command virtualenv /opt/uwsgi
+- action: command /opt/uwsgi/bin/pip install uwsgi
+- action: file path=/opt/uwsgi/etc/uwsgi.d state=directory
+- action: template src=templates/uwsgi_fastrouter.j2 dest=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini
+- action: file path=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini owner=nobody group=nogroup
+- action: template src=templates/uwsgi_init.j2 dest=/etc/init.d/uwsgi
+- action: file path=/etc/init.d/uwsgi mode=755
+- action: command update-rc.d uwsgi defaults
+- action: service name=uwsgi state=restarted

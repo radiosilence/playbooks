@@ -1,8 +1,11 @@
 [national]
 146.185.136.210
 
-[djangoservers:children]
+[django:children]
 national
 
-[postgresservers:children]
+[postgres:children]
 national
+
+[all:vars]
+env=links

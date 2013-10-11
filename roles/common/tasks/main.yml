@@ -38,19 +38,19 @@
   - zsh
 
 - name: create users
-  user: name={{ item.name }} shell={{ item.shell }} comment={{ item.full_name }} generate_ssh_key=yes
-  with_items: "{{ users }}"
-  when: group_names[0] in item.env
+  user: name={{ item.username }} shell={{ item.shell }} comment="{{ item.full_name }}" generate_ssh_key=yes
+  with_items: users
+  when: env in item.env
 
 - name: add authorised keys
-  authorized_key: key={{ item.key }} user={{ item.name }}
-  with_items: "{{ users }}"
-  when: group_names[0] in item.env
+  authorized_key: key="{{ item.key }}" user={{ item.username }}
+  with_items: users
+  when: env in item.env
 
 - name: add root authorised keys
-  authorized_key: key={{ item.key }} user=root
-  with_items: "{{ users }}"
-  when: (group_names[0] in item.env) and item.root_access
+  authorized_key: key="{{ item.key }}" user=root
+  with_items: users
+  when: (env in item.env) and item.root_access
 
 - name: get rid of libnss-mdns
   apt: pkg=libnss-mdns state=absent

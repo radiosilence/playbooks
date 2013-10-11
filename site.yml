@@ -5,7 +5,7 @@
   roles:
   - common
 
-- hosts: djangoservers
+- hosts: django
   user: root
   roles:
   - nginx
@@ -13,7 +13,7 @@
   - uwsgi
   - django
 
-- hosts: postgresservers
+- hosts: postgres
   user: root
   roles:
   - postgresql

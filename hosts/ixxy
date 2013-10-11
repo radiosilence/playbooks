@@ -1,7 +1,10 @@
-[djangoservers]
+[django]
 molior1
 ixxy1
 
-[postgresservers]
+[postgres]
 molior1
 ixxy1
+
+[all:vars]
+env=ixxy

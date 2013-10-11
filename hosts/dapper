@@ -1,7 +1,10 @@
-[djangoservers]
+[django]
 officenumbers.co.uk
 ronon
 
-[postgresservers]
+[postgres]
 officenumbers.co.uk
 ronon
+
+[all:vars]
+env=dapper

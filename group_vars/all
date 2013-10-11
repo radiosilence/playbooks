@@ -3,7 +3,20 @@ users:
   shell: /usr/bin/bash
   pubkeys:
   - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDipps3qoDk/jY3FGypRPOBgVwprVBqtzfCVYDRFxkMg8l2CmU9tU2w6TTa+VnaUuHyzukCnI0StZhkEuVB+tuae6j6Xsl5iMiZLD0Wl2AmqT5Hf2mR39ILJTm/PHxEiNsaWLbLzRuqpXNhjCDOBdZn/hXNDLdXVFw2gYffuBuZk0hsV0Shi8fPrNCj4NhghFZUNIBmeOoyqzWDQf2iHreDRTNmNL6uYBaVqs9m2KlUg41uEQ0rarFyi3nBj9zGjhJev4yxCBFvrUfBsyfxpfgSsNdf29R5KJ3EhQREf5vAnL5GkT0KKWP1yzDoW4JVS5j43W07brm/X5/gJVwltGl5MqiopWG6MQG/26htgBoywH22wBj5N1g7lYfJP8oT/fBqbnvJdFp4lJO8kNmgGESC4YWHtraUSpmG9EdKQ9sJMw7QhGNLTVKTtefmaA7PznzGITk8qZ8qsrx6pzL1p8zLMX5fmKV7D+43QcNmQ9H2Ajohd8NXlvYMSiBUhmLhBYyx3GGR7cOnjMhkpH19uqp/ZYXSQIkuik9YmrTLPVouC8ePOxm6aMyTnpWfbNLoq1ECnKxeDxDchwrYyK2mR7aLXhiVCMWXKR+CzDhZHl/iZZcn/pq7VtDRr+1c/hMuNqDELCEfTDVJew/Q07SJKEhmn7zhGn/4NwZOdNaUY4LS8Q== jc@blit.cc
+  groups:
+  - dapper
+  - ixxy
+  - links
+
+- username: jharvey
+  pubkeys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVvc/rZCwB/f9u7txn+QVGksMMWbgpKaOcuIMP164lCG/AeUf+54vU3WwPo9sXptIKq4F4xZrBreUY0zpfWEUswngY2B+SigqVV7fUURSvdfvnYRpjd3hHmtCl0TAbnZa+G70N94fsItv2s0krBcB+MI901xdcCR2qFoR4Tbv/LMFzH3JURdC/eI5oeYegmC3Wkss62C7izWGz4OpfMXLTvw2k1w/ULBp50ZaSbjaDyJ4vbRDgPF5KrSTeS5wJAxcO0ksYWG8d7DcCHMWYmwlDpwdCJcpPbUvOZxOOwJiAMbiwbyXdBCiJwIIYz3KEgWkCVeFZ7Qt2U9Mtg8ddplo7 James@JamesMBP.local
+  groups:
+  - links
+
 - username: abaker
   shell: /usr/bin/zsh
   pubkeys:
   - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAuj/5tyj71vZ6a4RO2yb1QotaV8iIazZywfGl518a7YlLnl7uQRVyCQAPXYRwx9EpDAd9bHmltM/kkqkdFWspk/MVfBa/AxbKNVaRnHdDgmVAzarmYOyNpD3CfLjP30/IxzIyd1sdUWxKtKYfVRT8fJP+J5mTCY3CEqmApTcX6jPjYW7uutM3mtsm6JlcydVzAM842KUKaKGCPOykSabTdgUyZJoKjfZloII07rE4I64YwrI78BLxvQWRp52uzGUfuZkUjmhWeKdCcHCXkg7HjEuoS8+lAr2MUkigElDwLKaK97RQM0hZEMfd4S1E613Y6GzafYdGUxeBqm9kR3bf+w== andybaker@macbook.lan
+  groups:
+  - ixxy

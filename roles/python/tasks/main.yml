@@ -1,8 +1,12 @@
 ---
-- action: apt pkg={{ item }} state=latest update_cache=yes
+- name: install python 2.7
+  apt: pkg=python2.7 state=latest
+
+- name: install python development package
+  apt: pkg=python2.7-dev state=latest
+
+- name: install virtualenv and virtualenvwrapper
+  apt: pkg={{ item }} state=latest
   with_items:
-  - python2.7
-  - python2.7-dev
   - python-virtualenv
-  - python-apt
   - virtualenvwrapper

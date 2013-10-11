@@ -1,8 +1,17 @@
 ---
-- pip: virtualenv=/opt/uwsgi name=uwsgi
-- action: file path=/opt/uwsgi/etc/uwsgi.d state=directory
-- action: template src=uwsgi_fastrouter.j2 dest=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini
-- action: file path=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini owner=nobody group=nogroup
-- action: template src=uwsgi_init.j2 dest=/etc/init.d/uwsgi
-- action: file path=/etc/init.d/uwsgi mode=700
-- action: service name=uwsgi state=restarted enabled=yes
+- name: install uwsgi inside virtualenv
+  pip: virtualenv=/opt/uwsgi name=uwsgi
+  notify: restart uwsgi
+
+- name: create uwsgi.d
+  file: path=/opt/uwsgi/etc/uwsgi.d state=directory
+
+- name: create uwsgi fastrouter config
+  template: src=uwsgi_fastrouter.j2 dest=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini
+
+- name: chown uwsgi fastrouter config to nobody
+  file: path=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini owner=nobody group=nogroup
+
+- name: create uwsgi init script
+  template: src=uwsgi_init.j2 dest=/etc/init.d/uwsgi
+  notify: restart uwsgi

@@ -1,15 +1,31 @@
 ---
-- action: apt_repository repo='deb http://nginx.org/packages/mainline/debian/ wheezy nginx' state=present
-- action: apt_key url=http://nginx.org/keys/nginx_signing.key state=present
-- action: apt pkg={{ item }} state=absent
+- name: add nginx repo
+  apt_repository: repo='deb http://nginx.org/packages/mainline/debian/ wheezy nginx' state=present
+
+- name: add nginx repo key
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+
+- name: uninstall any old nginx packages
+  apt: pkg={{ item }} state=absent
   with_items:
   - nginx-extras
   - nginx-common
-- action: apt pkg={{ item }} state=latest update_cache=yes
+
+- name: create nginx servers directory
+  file: dest=/etc/nginx/servers state=directory
+
+- name: create nginx certificates directory
+  file: path=/etc/nginx/certs state=directory
+
+- name: startssl CA
+  template: src=startssl.j2 dest=/etc/nginx/certs/startssl.pem
+
+- name: install nginx
+  apt: pkg={{ item }} state=latest update_cache=yes
   with_items:
   - nginx
-- action: template src=nginx.j2 dest=/etc/nginx/nginx.conf
-- action: file dest=/etc/nginx/servers state=directory
-- action: file path=/etc/nginx/certs state=directory
-- action: template src=startssl.j2 dest=/etc/nginx/certs/startssl.pem
-- action: service name=nginx state=restarted
+  notify: restart nginx
+
+- name: replace nginx config
+  template: src=nginx.j2 dest=/etc/nginx/nginx.conf
+  notify: restart nginx

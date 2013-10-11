@@ -1,18 +1,28 @@
 ---
-- name: Basic sources
+- name: base sources
   apt_repository: repo="{{ item }}" state=present
   with_items:
   - deb http://cdn.debian.net/debian/ wheezy main
   - deb http://security.debian.org/ wheezy/updates main
   - deb http://cdn.debian.net/debian/ wheezy-updates main
-- action: template src=iptables.j2 dest=/etc/iptables.rules
-- action: shell iptables-restore < /etc/iptables.rules
-- action: template src=iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
-- action: file path=/etc/network/if-pre-up.d/iptables mode=755
-- action: template src=iptables_save.j2 dest=/etc/network/if-post-down.d/iptables
-- action: file path=/etc/network/if-post-down.d/iptables mode=755
-- action: template src=20auto-upgrades.j2 dest=/etc/apt/apt.conf.d/20auto-upgrades
-- action: apt pkg={{ item }} state=latest update_cache=yes
+
+- name: iptables config
+  template: src=iptables.j2 dest=/etc/iptables.rules
+
+- name: activate iptables config
+  shell: iptables-restore < /etc/iptables.rules
+
+- name: auto iptables restore
+  template: src=iptables_restore.j2 dest=/etc/network/if-pre-up.d/iptables
+
+- name: auto iptables save
+  template: src=iptables_save.j2 dest=/etc/network/if-post-down.d/iptables
+
+- name: automatic upgrades
+  template: src=20auto-upgrades.j2 dest=/etc/apt/apt.conf.d/20auto-upgrades
+
+- name: base packages
+  apt: pkg={{ item }} state=latest update_cache=yes
   with_items:
   - automake
   - build-essential
@@ -26,8 +36,15 @@
   - unattended-upgrades
   - vim
   - zsh
-- action: apt pkg=libnss-mdns state=absent
-- action: template src=sudoers.j2 dest=/etc/sudoers
-- action: template src=sshd_config.j2 dest=/etc/ssh/sshd_config
-- action: service name=ssh state=restarted
+
+- name: get rid of libnss-mdns
+  apt: pkg=libnss-mdns state=absent
+
+- name: allow wheel to sudo
+  template: src=sudoers.j2 dest=/etc/sudoers
+
+- name: secure sshd config
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
+  notify:
+  - restart ssh
 - action: file path=/srv state=directory mode=711

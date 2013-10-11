@@ -1,4 +1,19 @@
 ---
 # file: site.yml
-- include: djangoservers.yml
-- include: postgresservers.yml
+- hosts: all
+  user: root
+  roles:
+  - common
+
+- hosts: djangoservers
+  user: root
+  roles:
+  - nginx
+  - python
+  - uwsgi
+  - django
+
+- hosts: postgresservers
+  user: root
+  roles:
+  - postgresql

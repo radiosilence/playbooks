@@ -1,7 +1,0 @@
----
-# file: postgresservers
-- hosts: postgresservers
-  user: root
-  roles:
-  - common
-  - postgresql

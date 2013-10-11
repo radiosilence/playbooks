@@ -1,13 +1,7 @@
-[ixxy]
+[djangoservers]
 molior1
 ixxy1
 
-[base]
+[postgresservers]
 molior1
-ixxy1
-
-[mariadb]
-molior1
-
-[postgresql]
 ixxy1

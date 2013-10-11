@@ -1,4 +1,4 @@
 playbooks
 =========
 
-Just my personal playbooks for provision Debian.
+Playbooks for Debian 7 "wheezy" servers.

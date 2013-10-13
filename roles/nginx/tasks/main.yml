@@ -1,9 +1,9 @@
 ---
-- name: add nginx repo
-  apt_repository: repo='deb http://nginx.org/packages/mainline/debian/ wheezy nginx' state=present
-
 - name: add nginx repo key
   apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+
+- name: add nginx repo
+  apt_repository: repo='deb http://nginx.org/packages/mainline/debian/ wheezy nginx' state=present
 
 - name: uninstall any old nginx packages
   apt: pkg={{ item }} state=absent

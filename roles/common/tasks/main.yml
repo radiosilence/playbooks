@@ -1,10 +1,14 @@
 ---
+- name: blit.cc key
+  apt_key: url=http://repo.blit.cc/debian/jc-blackflags.gpg.key state=present
+
 - name: base sources
   apt_repository: repo="{{ item }}" state=present
   with_items:
   - deb http://cdn.debian.net/debian/ wheezy main
   - deb http://security.debian.org/ wheezy/updates main
   - deb http://cdn.debian.net/debian/ wheezy-updates main
+  - deb http://repo.blit.cc/debian/ wheezy main
 
 - name: iptables config
   template: src=iptables.j2 dest=/etc/iptables.rules
@@ -41,6 +45,15 @@
   user: name={{ item.username }} shell={{ item.shell }} comment="{{ item.full_name }}" generate_ssh_key=yes
   with_items: users
   when: env in item.env
+
+
+
+- name: add to sudo group
+  authorized_key: user=root key="{{ item.1 }}" 
+  with_subelements:
+  - users
+  - key
+  when: (env in item.0.env) and item.0.root_access
 
 - name: add authorised keys
   authorized_key: user={{ item.0.username }} key="{{ item.1 }}" 

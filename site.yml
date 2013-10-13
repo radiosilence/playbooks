@@ -11,7 +11,9 @@
   - nginx
   - python
   - uwsgi
+  - node
   - django
+
 
 - hosts: postgres
   user: root

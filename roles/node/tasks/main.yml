@@ -4,6 +4,3 @@
   with_items:
   - node
 
-- name: symlink nodejs to node
-  file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
-

@@ -1,5 +1,6 @@
 ---
 # file: site.yml
+
 - hosts: all
   user: root
   roles:
@@ -13,7 +14,6 @@
   - uwsgi
   - node
   - django
-
 
 - hosts: postgres
   user: root

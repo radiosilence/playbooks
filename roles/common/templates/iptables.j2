@@ -42,6 +42,8 @@ COMMIT
 -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type 8 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -p icmp -m icmp --icmp-type 0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -j DROP
 COMMIT
 # Completed on Sun May 26 07:50:32 2013

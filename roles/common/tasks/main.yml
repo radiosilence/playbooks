@@ -47,7 +47,6 @@
   when: env in item.env
 
 
-
 - name: add to sudo group
   authorized_key: user=root key="{{ item.1 }}" 
   with_subelements:
@@ -79,4 +78,22 @@
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
   notify:
   - restart ssh
-- action: file path=/srv state=directory mode=711
+
+- name: make sure srv exists
+  file: path=/srv state=directory mode=711
+
+- name: create dynamic motd directory
+  file: path=/etc/update-motd.d state=directory
+
+- name: create motd scripts
+  copy: src=motd/{{ item }} dest=/etc/update-motd.d/{{ item }}
+  with_items: motd_scripts
+
+- name: make motd scripts executable
+  file: path=/etc/update-motd.d/{{ item }} mode=755
+  with_items: motd_scripts
+
+- name: symlink motd
+  file: src=/var/run/motd dest=/etc/motd state=link force=true
+
+

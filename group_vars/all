@@ -27,3 +27,9 @@ users:
   - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAuj/5tyj71vZ6a4RO2yb1QotaV8iIazZywfGl518a7YlLnl7uQRVyCQAPXYRwx9EpDAd9bHmltM/kkqkdFWspk/MVfBa/AxbKNVaRnHdDgmVAzarmYOyNpD3CfLjP30/IxzIyd1sdUWxKtKYfVRT8fJP+J5mTCY3CEqmApTcX6jPjYW7uutM3mtsm6JlcydVzAM842KUKaKGCPOykSabTdgUyZJoKjfZloII07rE4I64YwrI78BLxvQWRp52uzGUfuZkUjmhWeKdCcHCXkg7HjEuoS8+lAr2MUkigElDwLKaK97RQM0hZEMfd4S1E613Y6GzafYdGUxeBqm9kR3bf+w== andybaker@macbook.lan
   env:
   - ixxy
+
+motd_scripts:
+- 00-header
+- 10-sysinfo
+- 20-updates
+- 99-footer

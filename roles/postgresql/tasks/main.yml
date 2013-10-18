@@ -1,10 +1,19 @@
 ---
+- name: postgres repo key
+  apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
+
+- name: postgres repo
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main' state=present
+
 - name: install postgres
-  apt: pkg={{ item }} state=latest
+  apt: pkg={{ item }} state=latest update_cache=yes
   with_items:
-  - postgresql-9.1
-  - postgresql-server-dev-9.1
-  - pgbouncer
+  - postgresql-9.3
+  - postgresql-client-9.3
+  - postgresql-contrib-9.3
+  - postgresql-server-dev-all
+  - postgresql-9.3-postgis-2.1
+  - postgresql-9.3-postgis-2.1-scripts
   notify: restart postgresql
 
 - name: update postgres auth config

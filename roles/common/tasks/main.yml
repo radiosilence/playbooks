@@ -25,8 +25,10 @@
 - name: automatic upgrades
   template: src=20auto-upgrades.j2 dest=/etc/apt/apt.conf.d/20auto-upgrades
 
+- name: safe apt upgrade
+  apt:  update_cache=yes upgrade=safe
 - name: base packages
-  apt: pkg={{ item }} state=latest update_cache=yes
+  apt: pkg={{ item }} state=latest
   with_items:
   - automake
   - build-essential

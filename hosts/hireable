@@ -1,0 +1,11 @@
+[hireable]
+178.62.56.244
+
+[django:children]
+hireable
+
+[postgres:children]
+hireable
+
+[all:vars]
+env=hireable

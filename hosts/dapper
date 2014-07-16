@@ -1,9 +1,7 @@
 [django]
-officenumbers.co.uk
 ronon
 
 [postgres]
-officenumbers.co.uk
 ronon
 
 [all:vars]

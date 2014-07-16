@@ -4,7 +4,7 @@
   notify: restart uwsgi
 
 - name: create uwsgi.d
-  file: path=/opt/uwsgi/etc/uwsgi.d state=directory
+  file: path=/opt/uwsgi/etc/uwsgi.d state=directory mode=755
 
 - name: create uwsgi fastrouter config
   template: src=uwsgi_fastrouter.j2 dest=/opt/uwsgi/etc/uwsgi.d/fastrouter.ini

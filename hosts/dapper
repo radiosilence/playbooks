@@ -1,7 +1,7 @@
 [django]
 ronon
 
-[postgres]
+[postgres-9.3]
 ronon
 
 [all:vars]

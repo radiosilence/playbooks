@@ -4,7 +4,7 @@
 [django:children]
 hireable
 
-[postgres:children]
+[postgres-9.4:children]
 hireable
 
 [all:vars]

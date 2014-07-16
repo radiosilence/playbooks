@@ -4,7 +4,7 @@
 [django:children]
 national
 
-[postgres:children]
+[postgres-9.3:children]
 national
 
 [all:vars]

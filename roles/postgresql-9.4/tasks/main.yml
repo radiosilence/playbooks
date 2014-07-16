@@ -1,0 +1,18 @@
+---
+- name: postgres repo key
+  apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
+
+- name: postgres repo
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main' state=present
+
+- name: install postgres
+  apt: pkg={{ item }} state=latest update_cache=yes
+  with_items:
+  - postgresql-9.4
+  - postgresql-client-9.4
+  - postgresql-contrib-9.4
+  - postgresql-server-dev-9.4
+  - postgresql-9.4-postgis-2.1
+  - postgresql-9.4-postgis-2.1-scripts
+  notify: restart postgresql
+

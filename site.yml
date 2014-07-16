@@ -15,7 +15,7 @@
   - node
   - django
 
-- hosts: postgres
+- hosts: postgres-9.3
   user: root
   roles:
-  - postgresql
+  - postgresql-9.3

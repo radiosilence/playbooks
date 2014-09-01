@@ -39,6 +39,7 @@
   - molly-guard
   - pkg-config
   - sudo
+  - mosh
   - unattended-upgrades
   - vim
   - zsh
